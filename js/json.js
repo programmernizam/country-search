@@ -1,27 +1,35 @@
+// Spinner
+const spinner = style =>{
+    document.getElementById('spinner').style.display = style;
+}
 // Search Countries
 const searchBtn = () =>{
     const searchFiled = document.getElementById('search-filed')
     const searchResult = searchFiled.value
     searchFiled.value = ''
+    spinner('block')
     const error = document.getElementById('error')
     error.innerText = ''
     if(searchResult == ''){
         error.innerText = 'Please enter a country name here'
+        spinner('none')
     }
     else{
         const url = `https://restcountries.com/v3.1/name/${searchResult}`
         fetch(url)
         .then(res => res.json())
-        .then(data =>{if(data[0]==undefined){
+        .then(data =>
+        {if(data[0]==undefined){
             error.innerText = `Result Not Found "${searchResult}"`
             error.className = 'text-danger'
+            spinner('none')
         }
     else{
         error.innerText = `${data.length} search result found "${searchResult}"`
         error.className = 'text-success'
         displayResult(data)
+        spinner('none')
     }})
-        .catch(error )
     }
 }
 const displayResult = name =>{
