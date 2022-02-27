@@ -4,6 +4,7 @@ const spinner = style =>{
 }
 // Search Countries
 const searchBtn = () =>{
+    document.getElementById('display-search').textContent = ''
     const searchFiled = document.getElementById('search-filed')
     const searchResult = searchFiled.value
     searchFiled.value = ''
